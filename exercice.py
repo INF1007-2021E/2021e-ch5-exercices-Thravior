@@ -6,7 +6,9 @@ from typing import List
 
 
 def convert_to_absolute(number: float) -> float:
-    return 0
+    if number > 0:
+        return number
+    else: return -number
 
 
 def use_prefixes() -> List[str]:
@@ -15,12 +17,27 @@ def use_prefixes() -> List[str]:
     return [""]
 
 
-def prime_integer_summation() -> int:
-    return 0
+def prime_integer_summation(num=100) -> int:
+    i = 2
+    primes = [2]
+    while len(primes)<num:
+        for prime in primes:
+            if i%prime == 0:
+                #n'est pas premier
+                break
+            elif prime >= i//2:
+                #est premier
+                primes.append(i)
+                break
+        i+=1
+    return sum(primes)
 
 
 def factorial(number: int) -> int:
-    return 0
+    temp = 1
+    for i in range(1,number):
+        temp*=i
+    return temp
 
 
 def use_continue() -> None:
@@ -28,7 +45,26 @@ def use_continue() -> None:
 
 
 def verify_ages(groups: List[List[int]]) -> List[bool]:
-    return []
+    evaluation = []
+    for groupe in groups:
+        groupe.sort()
+        print(groupe)
+        if len(groupe) not in range(4,9):
+            evaluation.append(False)
+        else:
+            if 25 in groupe:
+                evaluation.append(True)
+                continue
+            for membre in groupe:
+                if membre < 18:
+                    evaluation.append(False)
+                    break
+                elif membre > 70 and 50 in groupe:
+                    evaluation.append(False)
+                    break
+            else:
+                evaluation.append(True)
+    return evaluation
 
 
 def main() -> None:
